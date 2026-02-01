@@ -10,15 +10,23 @@ type Task = {
 };
 
 function App() {
-  const tasks: Task[] = [
+  const [tasks, setTasks] = useState<Task[]>([
     {
       id: 1,
       title: 'Buy groceries',
       completionStatus: false,
     },
-  ];
+  ]);
 
   const [task, setTask] = useState('');
+
+  const onAddTask = (task: string) => {
+    setTasks([
+      ...tasks,
+      { id: Date.now(), title: task, completionStatus: false },
+    ]);
+  };
+
   return (
     <>
       <div className="App">
@@ -31,7 +39,7 @@ function App() {
           placeholder="Add a new task"
           onChange={(e) => setTask(e.target.value)}
         />
-        <button onClick={() => console.log(task)}>Add Task</button>
+        <button onClick={() => onAddTask(task)}>Add Task</button>
         <ul>
           {tasks.map((task) => (
             <li key={task.id}>{task.title}</li>
