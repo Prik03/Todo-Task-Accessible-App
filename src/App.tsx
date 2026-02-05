@@ -1,45 +1,38 @@
 import { useState } from 'react';
-
-type priorityLevel = 'low' | 'medium' | 'high';
-
-type Task = {
-  id: number;
-  title: string;
-  completionStatus: boolean;
-  priorityLevel?: priorityLevel;
-};
+import type { Task } from './types';
+import TaskInput from './TaskInput';
+import CustomButton from './CustomButton';
 
 function App() {
-  const [tasks, setTasks] = useState<Task[]>([
-    {
-      id: 1,
-      title: 'Buy groceries',
-      completionStatus: false,
-    },
-  ]);
-
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [task, setTask] = useState('');
 
-  const onAddTask = (task: string) => {
+  const onAddTask = () => {
+    const trimTask = task.trim();
+    if (!trimTask) return;
     setTasks([
       ...tasks,
-      { id: Date.now(), title: task, completionStatus: false },
+      { id: Date.now(), title: trimTask, completionStatus: false },
     ]);
+    setTask('');
+  };
+
+  const onInputKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onAddTask();
+    }
   };
 
   return (
     <>
       <div className="App">
         <h1>Todo Accessible App</h1>
-        <label htmlFor="new-task-input">New Task</label>
-        <input
-          value={task}
-          id="new-task-input"
-          type="text"
-          placeholder="Add a new task"
-          onChange={(e) => setTask(e.target.value)}
+        <TaskInput
+          taskName={task}
+          setTask={setTask}
+          onInputKeydown={onInputKeydown}
         />
-        <button onClick={() => onAddTask(task)}>Add Task</button>
+        <CustomButton buttonText="Add Task" onAddTask={onAddTask} />
         <ul>
           {tasks.map((task) => (
             <li key={task.id}>{task.title}</li>
