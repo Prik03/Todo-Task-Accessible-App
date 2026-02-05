@@ -1,25 +1,32 @@
+import { useState } from 'react';
+
 type TaskInputProps = {
-  taskName?: string;
-  setTask: (taskName: string) => void;
-  onInputKeydown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  buttonText: string;
+  onAddTask: (taskName: string) => void;
 };
 
-export default function TaskInput({
-  taskName,
-  setTask,
-  onInputKeydown,
-}: TaskInputProps) {
+export default function TaskInput({ onAddTask, buttonText }: TaskInputProps) {
+  const [task, setTask] = useState('');
+
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const trimTask = task.trim();
+    if (!trimTask) return;
+    onAddTask(trimTask);
+    setTask('');
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit}>
       <label htmlFor="new-task-input">New Task</label>
       <input
-        value={taskName}
+        value={task}
         id="new-task-input"
         type="text"
         placeholder="Add a new task"
         onChange={(e) => setTask(e.target.value)}
-        onKeyDown={onInputKeydown}
       />
-    </>
+      <button>{buttonText}</button>
+    </form>
   );
 }
