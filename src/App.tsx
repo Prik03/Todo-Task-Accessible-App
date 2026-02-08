@@ -1,38 +1,23 @@
 import { useState } from 'react';
 import type { Task } from './types';
 import TaskInput from './TaskInput';
-import CustomButton from './CustomButton';
 
 function App() {
+  console.log('app load');
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [task, setTask] = useState('');
 
-  const onAddTask = () => {
-    const trimTask = task.trim();
-    if (!trimTask) return;
+  const onAddTask = (trimTask: string) => {
     setTasks([
       ...tasks,
       { id: Date.now(), title: trimTask, completionStatus: false },
     ]);
-    setTask('');
-  };
-
-  const onInputKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onAddTask();
-    }
   };
 
   return (
     <>
       <div className="App">
         <h1>Todo Accessible App</h1>
-        <TaskInput
-          taskName={task}
-          setTask={setTask}
-          onInputKeydown={onInputKeydown}
-        />
-        <CustomButton buttonText="Add Task" onAddTask={onAddTask} />
+        <TaskInput onAddTask={onAddTask} buttonText="Add Task" />
         <ul>
           {tasks.map((task) => (
             <li key={task.id}>{task.title}</li>
