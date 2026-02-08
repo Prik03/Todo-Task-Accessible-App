@@ -12,8 +12,10 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@tailwindcss/cli": "^4.1.18",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.18"
   },
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx}": [
