@@ -10,12 +10,13 @@
     "test": "vitest",
     "preview": "vite preview",
     "prepare": "husky",
-    "build:css": "tailwindcss -i ./src/todo.css -o ./src/style.css --minify"
+    "build:css": "tailwindcss -i ./src/todo.css -o ./src/output.css --minify"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.18"
   },
   "lint-staged": {
