@@ -10,12 +10,14 @@
     "test": "vitest",
     "preview": "vite preview",
     "prepare": "husky",
-    "build:css": "tailwindcss -i ./src/todo.css -o ./src/output.css --minify"
+    "build:css": "tailwindcss -i ./src/todo.css -o ./src/output.css --minify",
+    "tailwind:css": "npx tailwindcss -i ./src/todo.css -o ./src/output.css --watch"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-modal": "^3.16.3",
     "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.18"
   },
@@ -36,6 +38,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@types/react-modal": "^3.16.3",
     "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",

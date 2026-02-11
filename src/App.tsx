@@ -3,11 +3,13 @@ import type { Task } from './types';
 import TaskInput from './TaskInput';
 import TaskTable from './TaskTable';
 import { ToastContainer, toast } from 'react-toastify';
+import EditModal from './EditModal';
 
 function App() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [editTask, setEditTask] = useState<number | null>(null);
   const [updatedTask, setUpdatedTask] = useState<string>('');
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   const onAddTask = (trimTask: string) => {
     setTasks([
@@ -31,7 +33,16 @@ function App() {
     );
     toast('Task Updated');
     setEditTask(null);
+    setUpdatedTask('');
   };
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
   return (
     <>
       <div className="App mx-auto w-4/5">
@@ -45,6 +56,13 @@ function App() {
           setUpdatedTask={setUpdatedTask}
         />
         <ToastContainer />
+        <EditModal
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+          openModal={openModal}
+          closeModal={closeModal}
+        />
+        <button onClick={openModal}>open modal</button>
       </div>
     </>
   );

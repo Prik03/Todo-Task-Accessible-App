@@ -1,13 +1,5 @@
-import type { Task } from './types';
+import type { TableData } from './types';
 import { useRef, useEffect } from 'react';
-
-type TableData = {
-  tasks: Task[];
-  onEditTask: (task: Task) => void;
-  editTask: number | null;
-  onSaveTask: () => void;
-  setUpdatedTask: React.Dispatch<React.SetStateAction<string>>;
-};
 
 function TaskTable({
   tasks,
